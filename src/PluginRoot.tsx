@@ -4,11 +4,12 @@ import icon from "./icon.svg";
 
 export default function PluginRoot() {
     useEffect(() => {
+        const baseUrl = window.location.origin + window.location.pathname.replace(/^\/$/, '');
         registerSidebarTool({
             id: "whiteboards-notepad",
-            icon: window.location.origin + window.location.pathname + icon,
+            icon: baseUrl + icon,
             tooltip: "Notepad",
-            contentUrl: window.location.origin + window.location.pathname + "?sidebar",
+            contentUrl: baseUrl + "?sidebar",
         });
     }, []);
 
