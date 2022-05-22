@@ -43,7 +43,7 @@
     ]
   },
   "devDependencies": {
-    "@whiteboards-io/plugins": "^1.5.0",
+    "@whiteboards-io/plugins": "^1.6.0",
     "react-async-hook": "^4.0.0"
   }
 }

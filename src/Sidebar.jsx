@@ -1,11 +1,11 @@
 import {CKEditor} from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import {getPluginBoardData, setPluginBoardData, watchPluginBoardData} from "@whiteboards-io/plugins";
+import {getPluginBoardUserData, setPluginBoardUserData, watchPluginBoardUserData} from "@whiteboards-io/plugins";
 import {useAsync} from "react-async-hook";
 
 export default function Sidebar() {
     const savedData = useAsync(() => {
-        return getPluginBoardData();
+        return getPluginBoardUserData();
     }, []);
 
     if (savedData.loading) {
@@ -16,9 +16,9 @@ export default function Sidebar() {
         <h1 style={{margin: "0px 0 0 40px"}}>Notepad</h1>
         <CKEditor
             editor={ClassicEditor}
-            data={savedData.result.data}
+            data={savedData.result?.data}
             onReady={editor => {
-                watchPluginBoardData(pluginData => {
+                watchPluginBoardUserData(pluginData => {
                     if (editor.getData() !== pluginData.data) {
                         console.log("CHANGE", pluginData.data);
                     }
@@ -26,7 +26,7 @@ export default function Sidebar() {
             }}
             onChange={(event, editor) => {
                 const data = editor.getData();
-                setPluginBoardData({data});
+                setPluginBoardUserData({data});
             }}
             onBlur={(event, editor) => {
                 console.log('Blur.', editor);
